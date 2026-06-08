@@ -1,39 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Estados</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simplex Sistemas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
 
-    <a href="/cadastroEstado">Novo Estado</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <img src="/" width="40" height="40" class="me-2" alt="Logo">
+    <a class="navbar-brand" href="/administrativo">Simplex Sistemas</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Menu
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Ação</a></li>
+            <li><a class="dropdown-item" href="#">Outra ação</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Algo mais</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Pesquisar...">
+        <button class="btn btn-outline-light" type="submit">Pesquisar</button>
+      </form>
+    </div>
+  </div>
+</nav>
 
-    <br><br>
+<div class="container mt-4">
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Sigla</th>
-                <th>Ação</th>
-            </tr>
+  <div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Lista de Estados</h5>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-hover table-striped mb-0">
+        <thead class="table-light">
+          <tr>
+            <th style="width: 60px">ID</th>
+            <th>Nome</th>
+            <th style="width: 100px">Sigla</th>
+            <th style="width: 180px">Ação</th>
+          </tr>
         </thead>
         <tbody>
-            <tr th:each="estado : ${estados}">
-                <td th:text="${estado.id}"></td>
-                <td th:text="${estado.nome}"></td>
-                <td th:text="${estado.sigla}"></td>
-                <td>
-                    <a th:href="@{/editarEstado/{id}(id=${estado.id})}">Editar</a>
-                    <a th:href="@{/removerEstado/{id}(id=${estado.id})}">Remover</a>
-                </td>
-            </tr>
+          <tr th:each="estado : ${estados}">
+            <td th:text="${estado.id}"></td>
+            <td th:text="${estado.nome}"></td>
+            <td>
+              <span class="badge bg-primary" th:text="${estado.sigla}"></span>
+            </td>
+            <td class="d-flex gap-2" >
+              <a th:href="@{/editarEstado/{id}(id=${estado.id})}" class="btn btn-sm btn-outline-primary me-2">
+                <i class="fa-solid fa-pen-to-square"></i> Editar
+              </a>
+              <a th:href="@{/removerEstado/{id}(id=${estado.id})}" class="btn btn-sm btn-outline-danger">
+                <i class="fa-solid fa-trash"></i> Remover
+              </a>
+            </td>
+          </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+  </div>
 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
